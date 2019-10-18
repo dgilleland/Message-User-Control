@@ -6,4 +6,5 @@ using System.Web;
 namespace FreeCode.WebApp.UserControls
 {
     public delegate void ProcessRequest();
+    public delegate string FeedbackRequest();
 }

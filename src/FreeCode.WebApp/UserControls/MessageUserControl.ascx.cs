@@ -56,6 +56,14 @@ namespace FreeCode.WebApp.UserControls
         {
             TryCatch(callback);
         }
+
+        public void TryRun(FeedbackRequest callback, string title)
+        {
+            string feedbackMessage;
+            if (TryCatch(callback, out feedbackMessage))
+                ShowInfo(feedbackMessage, title, STR_TITLE_ICON_success, STR_PANEL_success);
+        }
+
         /// <summary>
         /// Processes a request through a callback delegate within a try/catch block. Distinguished Entity Framework exceptions from general exceptions.
         /// </summary>
@@ -91,6 +99,24 @@ namespace FreeCode.WebApp.UserControls
         }
         #endregion
         #region Private methods - process details of messaging
+        private bool TryCatch(FeedbackRequest callback, out string feedback)
+        {
+            feedback = null;
+            try
+            {
+                feedback = callback();
+                return true;
+            }
+            catch (DbEntityValidationException ex)
+            {
+                HandleException(ex);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
+            return false;
+        }
         /// <summary>
         /// Processes a request through a callback delegate within a try/catch block. Distinguished Entity Framework exceptions from general exceptions.
         /// </summary>
