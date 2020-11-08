@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using FreeCode.Exceptions;
 
 namespace FreeCode.WebApp.UserControls
 {
@@ -16,6 +17,9 @@ namespace FreeCode.WebApp.UserControls
         private const string STR_TEXT_GeneralErrors = "Unable to process your submission due to the following reason(s).";
         private const string STR_TITLE_ValidationErrors = "Validation Errors";
         private const string STR_TEXT_ValidationErrors = "Validation errors encountered with your submission.";
+        private const string STR_TITLE_BusinessRuleErrors = "Business Requirements";
+        private const string STR_TEXT_BusinessRuleErrors = "Business rule errors encountered with your submission.";
+
         private const string STR_TITLE_UsageInstructions = "Usage Instructions";
         private const string STR_TITLE_ICON_warning = "glyphicon glyphicon-warning-sign";
         private const string STR_PANEL_danger = "panel panel-danger";
@@ -107,6 +111,10 @@ namespace FreeCode.WebApp.UserControls
                 feedback = callback();
                 return true;
             }
+            catch (BusinessRuleCollectionException ex)
+            {
+                HandleException(ex);
+            }
             catch (DbEntityValidationException ex)
             {
                 HandleException(ex);
@@ -129,6 +137,10 @@ namespace FreeCode.WebApp.UserControls
                 callback();
                 return true;
             }
+            catch (BusinessRuleCollectionException ex)
+            {
+                HandleException(ex);
+            }
             catch (DbEntityValidationException ex)
             {
                 HandleException(ex);
@@ -138,6 +150,15 @@ namespace FreeCode.WebApp.UserControls
                 HandleException(ex);
             }
             return false;
+        }
+        private void HandleException(BusinessRuleCollectionException ex)
+        {
+            var details = from rule in ex.Rules
+                          select new
+                          {
+                              Error = rule.Message
+                          };
+            ShowExceptions(details, STR_TEXT_BusinessRuleErrors, STR_TITLE_BusinessRuleErrors, STR_TITLE_ICON_warning, STR_PANEL_danger);
         }
         /// <summary>
         /// Handles a DbEntityValidationException by getting the details of each validation error and showing it as a Validation Exception.
