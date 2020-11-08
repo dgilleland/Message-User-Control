@@ -95,6 +95,11 @@ namespace FreeCode.WebApp.UserControls
                 HandleException(e.Exception.InnerException as DbEntityValidationException);
                 e.ExceptionHandled = true;
             }
+            else if (e.Exception is TargetInvocationException && e.Exception.InnerException is BusinessRuleCollectionException)
+            {
+                HandleException(e.Exception.InnerException as BusinessRuleCollectionException);
+                e.ExceptionHandled = true;
+            }
             else if (e.Exception is Exception)
             {
                 HandleException(e.Exception as Exception);
