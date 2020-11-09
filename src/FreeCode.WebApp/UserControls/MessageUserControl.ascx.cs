@@ -22,11 +22,11 @@ namespace FreeCode.WebApp.UserControls
 
         private const string STR_TITLE_UsageInstructions = "Usage Instructions";
         private const string STR_TITLE_ICON_warning = "glyphicon glyphicon-warning-sign";
-        private const string STR_PANEL_danger = "panel panel-danger";
+        private const string STR_PANEL_danger = "card-header bg-danger text-white font-weight-bold"; // panel panel-danger
         private const string STR_TITLE_ICON_info = "glyphicon glyphicon-info-sign";
-        private const string STR_PANEL_info = "panel panel-info";
+        private const string STR_PANEL_info = "card-header bg-info text-white font-weight-bold"; // panel panel-info
         private const string STR_TITLE_ICON_success = "glyphicon glyphicon-ok-sign";
-        private const string STR_PANEL_success = "panel panel-success";
+        private const string STR_PANEL_success = "card-header bg-success text-white font-weight-bold"; // panel panel-success
         #endregion
         #region Event Handlers
         protected void Page_Load(object sender, EventArgs e)
@@ -221,7 +221,7 @@ namespace FreeCode.WebApp.UserControls
             MessageLabel.Text = messageText;
             MessageTitle.Text = messageTitle;
             MessageTitleIcon.CssClass = titleIcon;
-            MessagePanel.CssClass = panelClass;
+            CardHeader.CssClass = panelClass;
             MessagePanel.Visible = true;
         }
         #endregion

@@ -1,8 +1,8 @@
-# Message User Control (v 0.2.0.0)
+# Message User Control (v 0.2.1.0)
 
 > This is a final release project. Plans exist to sunset this sometime in 2021. This is for educational purposes only - **Do not use in production environments!**.
 
-This version now includes support for [**Business Rule Exceptions**](https://github.com/dgilleland/BusinessRuleException).
+This version now includes support for [**Business Rule Exceptions**](https://github.com/dgilleland/BusinessRuleException) and **Bootstrap 4**.
 
 ## Installing
 
