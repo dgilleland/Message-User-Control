@@ -4,6 +4,8 @@
 
 This version now includes support for [**Business Rule Exceptions**](https://github.com/dgilleland/BusinessRuleException) and **Bootstrap 4**.
 
+![](./docs/demo.png)
+
 ## Installing
 
 In your **Web Application Project** (.Net Framework), add the NuGet package for the `FreeCode.WebApp` package.
